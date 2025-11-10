@@ -31,92 +31,97 @@ const Header = (): ReactElement => {
   ];
 
   return (
-    <header className="bg-blue-600 text-white p-4">
-      <nav className="container mx-auto flex justify-between items-center">
-        <div className="text-xl font-bold">
-          <Link href="/" className="hover:opacity-80 transition-opacity">
-            CESI UCAD
-          </Link>
-        </div>
-        
-        {/* Menu hamburger pour mobile */}
-        <button
-          type="button"
-          className="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-white"
-          onClick={toggleMenu}
-          aria-expanded={isMenuOpen}
-          aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-          aria-controls="mobile-menu"
-        >
-          <span className="sr-only">
-            {isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-          </span>
-          <svg 
-            className="w-6 h-6" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden={true}
-          >
-            {isMenuOpen ? (
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M6 18L18 6M6 6l12 12" 
-              />
-            ) : (
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M4 6h16M4 12h16M4 18h16" 
-              />
-            )}
-          </svg>
-        </button>
-        {/* Menu desktop */}
-        <ul className="hidden md:flex space-x-4">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link 
-                href={link.href}
-                className="hover:underline hover:opacity-80 transition-opacity px-2 py-1 rounded"
-                onClick={closeMenu}
+    <header className="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg">
+      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link 
+              href="/" 
+              className="text-2xl font-extrabold text-white hover:text-blue-100 transition-colors duration-200 flex items-center"
+            >
+              <span className="bg-white text-blue-600 px-3 py-1 rounded-lg mr-2">CESI</span>
+              <span>UCAD</span>
+            </Link>
+          </div>
+          
+          {/* Menu desktop */}
+          <div className="hidden md:block">
+            <ul className="ml-10 flex items-baseline space-x-8">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link 
+                    href={link.href}
+                    className="text-blue-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-500 transition-all duration-200"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          {/* Bouton menu mobile */}
+          <div className="md:hidden flex items-center">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center p-2 rounded-md text-blue-200 hover:text-white hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-700 focus:ring-white transition-colors duration-200"
+              onClick={toggleMenu}
+              aria-expanded={isMenuOpen}
+              aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            >
+              <span className="sr-only">
+                {isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+              </span>
+              <svg 
+                className={`h-6 w-6 transform transition-transform duration-200 ${isMenuOpen ? 'rotate-90' : ''}`}
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden={true}
               >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        
-        {/* Menu mobile */}
-        <div 
-          id="mobile-menu" 
-          className={`md:hidden absolute top-full left-0 right-0 bg-blue-600 flex flex-col space-y-2 p-4 transition-all duration-300 ease-in-out ${
-            isMenuOpen 
-              ? 'opacity-100 visible max-h-screen py-4' 
-              : 'opacity-0 invisible max-h-0 py-0 overflow-hidden'
-          }`}
-          aria-hidden={!isMenuOpen}
-        >
-          <ul className="space-y-2">
-            {navLinks.map((link) => (
-              <li key={`mobile-${link.href}`}>
-                <Link 
-                  href={link.href}
-                  className="block hover:bg-blue-700 px-4 py-2 rounded transition-colors"
-                  onClick={closeMenu}
-                  tabIndex={isMenuOpen ? 0 : -1}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+                {isMenuOpen ? (
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M6 18L18 6M6 6l12 12" 
+                  />
+                ) : (
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M4 6h16M4 12h16M4 18h16" 
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
       </nav>
+      
+      {/* Menu mobile */}
+      <div 
+        id="mobile-menu" 
+        className={`md:hidden bg-blue-600 transition-all duration-300 ease-in-out overflow-hidden ${
+          isMenuOpen ? 'max-h-96 py-2' : 'max-h-0 py-0'
+        }`}
+      >
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700 transition-colors duration-200"
+              onClick={closeMenu}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </div>
     </header>
   );
 };

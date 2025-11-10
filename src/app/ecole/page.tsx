@@ -9,10 +9,14 @@ import { useState, useEffect } from 'react';
 interface SchoolData {
   nom: string;
   description: string;
-  fondation: string;
-  effectif: number;
-  campus: string[];
-  image: string;
+  fondation?: string;
+  effectif?: number;
+  campus?: string[];
+  image?: string;
+  localisation?: string;
+  sigle?: string;
+  departement?: string;
+  filiere_principale?: string;
 }
 
 interface Filiere {
@@ -65,18 +69,46 @@ export default function Ecole() {
       <Header />
       <main>
         <Section title="Informations sur l'École">
-          <Card
-            title={school.nom}
-            description={`${school.description} Fondée en ${school.fondation}. Effectif: ${school.effectif} étudiants.`}
-          />
-          
-          <div className="mt-6">
-            <h3 className="text-lg font-semibold mb-2">Campus :</h3>
-            <ul className="list-disc pl-5">
-              {school.campus.map((campus, index) => (
-                <li key={index} className="mb-1">{campus}</li>
-              ))}
-            </ul>
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">{school.nom} {school.sigle && `(${school.sigle})`}</h2>
+            <p className="text-gray-700 dark:text-gray-300">{school.description}</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              {school.fondation && (
+                <div>
+                  <h3 className="font-semibold">Année de fondation</h3>
+                  <p>{school.fondation}</p>
+                </div>
+              )}
+              
+              {school.effectif && (
+                <div>
+                  <h3 className="font-semibold">Effectif</h3>
+                  <p>{school.effectif} étudiants</p>
+                </div>
+              )}
+              
+              {school.departement && (
+                <div>
+                  <h3 className="font-semibold">Département</h3>
+                  <p>{school.departement}</p>
+                </div>
+              )}
+              
+              {school.filiere_principale && (
+                <div>
+                  <h3 className="font-semibold">Filière principale</h3>
+                  <p>{school.filiere_principale}</p>
+                </div>
+              )}
+              
+              {school.localisation && (
+                <div className="md:col-span-2">
+                  <h3 className="font-semibold">Localisation</h3>
+                  <p>{school.localisation}</p>
+                </div>
+              )}
+            </div>
           </div>
         </Section>
 

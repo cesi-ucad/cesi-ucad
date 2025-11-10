@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Désactiver l'indexation des dossiers d'administration
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://cesi-ucad.sn/sitemap.xml

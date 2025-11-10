@@ -1,0 +1,16 @@
+[
+  {
+    "titre": "MoodCare",
+    "auteur": "Groupe Féminin CESI",
+    "description": "Application pour la santé mentale et le bien-être des étudiantes.",
+    "technos": ["React", "Firebase", "Dialogflow"],
+    "github": "https://github.com/CESI-UCAD/moodcare"
+  },
+  {
+    "titre": "HerHealth",
+    "auteur": "Équipe AI Lab CESI",
+    "description": "Application de suivi de santé féminine utilisant le NLP.",
+    "technos": ["FastAPI", "spaCy", "React Native"],
+    "github": "https://github.com/CESI-UCAD/herhealth"
+  }
+]

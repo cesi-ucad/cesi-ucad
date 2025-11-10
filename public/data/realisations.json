@@ -1,0 +1,14 @@
+[
+  {
+    "titre": "Formation Git et GitHub",
+    "date": "2025-02-02",
+    "responsable": "Malick BA",
+    "description": "Atelier de formation destiné aux étudiants sur la gestion de version et la collaboration."
+  },
+  {
+    "titre": "Hackathon CESI Innov 2025",
+    "date": "2025-03-10",
+    "responsable": "Commission Innovation",
+    "description": "Compétition inter-niveaux autour de la création d'applications utiles à la société."
+  }
+]

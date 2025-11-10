@@ -1,0 +1,52 @@
+{
+  "nom": "Université Cheikh Anta Diop de Dakar",
+  "sigle": "UCAD",
+  "description": "L'Université Cheikh Anta Diop de Dakar est la principale université du Sénégal et l'une des plus prestigieuses d'Afrique de l'Ouest.",
+  "departement": "Département d'Informatique et de Télécommunications",
+  "filiere_principale": "Informatique",
+  "localisation": "Dakar, Sénégal",
+  "specialisations": [
+    {
+      "nom": "Informatique Fondamentale",
+      "description": "Formation approfondie en algorithmique, structures de données et théorie de l'information.",
+      "duree": "3 ans",
+      "niveau": "Licence"
+    },
+    {
+      "nom": "Génie Logiciel",
+      "description": "Spécialisation en conception, développement et maintenance des logiciels.",
+      "duree": "2 ans",
+      "niveau": "Master"
+    },
+    {
+      "nom": "Réseaux et Télécommunications",
+      "description": "Formation en conception et gestion des réseaux informatiques et télécoms.",
+      "duree": "2 ans",
+      "niveau": "Master"
+    },
+    {
+      "nom": "Intelligence Artificielle et Science des Données",
+      "description": "Spécialisation en machine learning, data mining et intelligence artificielle.",
+      "duree": "2 ans",
+      "niveau": "Master"
+    },
+    {
+      "nom": "Sécurité Informatique",
+      "description": "Formation en cybersécurité et protection des systèmes d'information.",
+      "duree": "2 ans",
+      "niveau": "Master"
+    },
+    {
+      "nom": "Informatique Décisionnelle",
+      "description": "Spécialisation en analyse de données et aide à la décision.",
+      "duree": "2 ans",
+      "niveau": "Master"
+    }
+  ],
+  "contacts": {
+    "email": "info@ucad.sn",
+    "telephone": "+221 33 825 05 05",
+    "adresse": "Campus Universitaire de l'UCAD, BP 5005, Dakar-Fann, Sénégal",
+    "site_web": "https://www.ucad.sn"
+  }
+}

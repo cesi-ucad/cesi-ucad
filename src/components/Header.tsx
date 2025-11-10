@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, ReactElement } from 'react';
+import { useState } from 'react';
+import type { FC } from 'react';
 
 // Définition des types pour les propriétés des éléments SVG
 interface SVGProps extends React.SVGProps<SVGSVGElement> {
@@ -10,49 +11,65 @@ interface SVGProps extends React.SVGProps<SVGSVGElement> {
   children?: React.ReactNode;
 }
 
-const Header = (): ReactElement => {
+const Header: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Fonction pour basculer le menu
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
+  
+  // Type pour les liens de navigation
+  interface NavLink {
+    href: string;
+    label: string;
+  }
 
   // Données des liens de navigation
-  const navLinks = [
-    { href: '/ecole', label: 'École' },
-    { href: '/filieres', label: 'Filières' },
-    { href: '/club', label: 'Club' },
+  const navLinks: NavLink[] = [
+    { href: '/', label: 'Accueil' },
+    { href: '/ecole', label: 'École & Filières' },
+    { href: '/club', label: 'Le Club' },
     { href: '/commissions', label: 'Commissions' },
-    { href: '/presidents', label: 'Présidents' },
-    { href: '/equipes', label: 'Équipes' },
-    { href: '/realisations', label: 'Réalisations' },
-    { href: '/membres', label: 'Membres' },
-    { href: '/projets', label: 'Projets' },
+    { href: '/realisations', label: 'Nos Réalisations' },
+    { href: '/contact', label: 'Contact' }
   ];
 
   return (
-    <header className="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg">
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link 
-              href="/" 
-              className="text-2xl font-extrabold text-white hover:text-blue-100 transition-colors duration-200 flex items-center"
-            >
-              <span className="bg-white text-blue-600 px-3 py-1 rounded-lg mr-2">CESI</span>
-              <span>UCAD</span>
+    <header className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-900 shadow-xl sticky top-0 z-50">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          {/* Logo du club */}
+          <div className="flex-shrink-0 flex items-center">
+            <Link href="/" className="flex items-center space-x-3">
+              {/* Logo CESI */}
+              <div className="w-12 h-12 flex items-center justify-center">
+                <img 
+                  src="/images/logo-cesi.jpg" 
+                  alt="Logo CESI UCAD" 
+                  className="h-10 w-auto"
+                  onError={(e) => {
+                    // Fallback si l'image ne charge pas
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiI+PHBhdGggZD0iTTEyIDJMNCA3bDggNSAxMC02LTEwLTZ6bTAgMThsLTgtNSAxMC02IDggNS0xMCA2eiIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTQgMTFsOCA1IDEwLTYiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==';
+                  }}
+                />
+              </div>
+              <div className="hidden md:block">
+                <span className="text-white text-xl font-bold">CESI UCAD</span>
+                <p className="text-primary-200 text-xs">Club d'Excellence en Systèmes d'Information</p>
+              </div>
             </Link>
           </div>
           
           {/* Menu desktop */}
-          <div className="hidden md:block">
-            <ul className="ml-10 flex items-baseline space-x-8">
+          <div className="hidden lg:block">
+            <ul className="ml-10 flex items-center space-x-4">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link 
                     href={link.href}
-                    className="text-blue-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-500 transition-all duration-200"
+                    className="text-white hover:bg-primary-700 px-4 py-3 rounded-md text-sm font-medium transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
@@ -62,10 +79,10 @@ const Header = (): ReactElement => {
           </div>
           
           {/* Bouton menu mobile */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-blue-200 hover:text-white hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-700 focus:ring-white transition-colors duration-200"
+              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-900 focus:ring-white transition-all duration-200"
               onClick={toggleMenu}
               aria-expanded={isMenuOpen}
               aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
@@ -105,8 +122,8 @@ const Header = (): ReactElement => {
       {/* Menu mobile */}
       <div 
         id="mobile-menu" 
-        className={`md:hidden bg-blue-600 transition-all duration-300 ease-in-out overflow-hidden ${
-          isMenuOpen ? 'max-h-96 py-2' : 'max-h-0 py-0'
+        className={`lg:hidden bg-primary-800 transition-all duration-300 ease-in-out overflow-hidden ${
+          isMenuOpen ? 'max-h-screen py-4' : 'max-h-0 py-0'
         }`}
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -114,12 +131,23 @@ const Header = (): ReactElement => {
             <Link
               key={link.href}
               href={link.href}
-              className="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700 transition-colors duration-200"
+              className="text-white hover:bg-primary-700 block px-3 py-2 rounded-md text-base font-medium"
               onClick={closeMenu}
             >
               {link.label}
             </Link>
           ))}
+          {/* Bouton Espace Membre */}
+          <a
+            href="/espace-membre"
+            className="flex items-center text-white hover:bg-primary-700 px-3 py-2 rounded-md text-base font-medium"
+            onClick={closeMenu}
+          >
+            <svg className="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Espace Membre
+          </a>
         </div>
       </div>
     </header>

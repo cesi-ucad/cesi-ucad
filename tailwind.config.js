@@ -23,32 +23,36 @@ module.exports = {
       black: '#000000',
       white: '#ffffff',
       
-      // Palette de couleurs principale
+      // Couleur principale du site
       primary: {
-        50: '#eff6ff',
-        100: '#dbeafe',
-        200: '#bfdbfe',
-        300: '#93c5fd',
-        400: '#60a5fa',
-        500: '#3b82f6',
-        600: '#2563eb',
-        700: '#1d4ed8',
-        800: '#1e40af',
-        900: '#1e3a8a',
+        DEFAULT: '#111196',
+        50: '#f0f0ff',
+        100: '#e0e0ff',
+        200: '#c7c7ff',
+        300: '#9e9eff',
+        400: '#6e6ef7',
+        500: '#4d4deb',
+        600: '#3a3ad9',
+        700: '#2e2ebf',
+        800: '#2a2a9b',
+        900: '#111196',
+        950: '#0a0a5c',
       },
       
       // Couleurs secondaires
       secondary: {
-        50: '#ecfdf5',
-        100: '#d1fae5',
-        200: '#a7f3d0',
-        300: '#6ee7b7',
-        400: '#34d399',
-        500: '#10b981',
-        600: '#059669',
-        700: '#047857',
-        800: '#065f46',
-        900: '#064e3b',
+        // Couleurs inspirées du footer
+        DEFAULT: '#1a365d',
+        50: '#f7fafc',
+        100: '#e6f0ff',
+        200: '#b3d1ff',
+        300: '#80b2ff',
+        400: '#4d93ff',
+        500: '#1a75ff',
+        600: '#0052cc',
+        700: '#003d99',
+        800: '#002966',
+        900: '#001433',
       },
       
       // Couleurs d'état

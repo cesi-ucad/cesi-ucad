@@ -4,20 +4,24 @@ import { motion } from 'framer-motion';
 
 interface CardProps {
   title: string;
-  description: string;
+  description: string | React.ReactNode;
+  subtitle?: string;
   footer?: string;
   children?: React.ReactNode;
+  className?: string;
 }
 
 const Card: React.FC<CardProps> = ({ 
   title, 
   description, 
+  subtitle,
   footer, 
-  children 
+  children,
+  className = ''
 }) => {
   return (
     <motion.div 
-      className="bg-white rounded-xl shadow-md overflow-hidden h-full flex flex-col p-6 hover:shadow-lg transition-shadow duration-300"
+      className={`bg-white rounded-xl shadow-md overflow-hidden h-full flex flex-col p-6 hover:shadow-lg transition-shadow duration-300 ${className}`}
       whileHover={{ 
         y: -5, 
         boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' 
@@ -25,12 +29,21 @@ const Card: React.FC<CardProps> = ({
       transition={{ duration: 0.3, ease: 'easeInOut' }}
     >
       <div className="flex-1 flex flex-col">
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">
+        <h3 className="text-xl font-semibold text-gray-800">
           {title}
         </h3>
-        <p className="text-gray-600 mb-4">
-          {description}
-        </p>
+        {subtitle && (
+          <p className="text-primary-600 font-medium mt-1 mb-3">
+            {subtitle}
+          </p>
+        )}
+        <div className="text-gray-600 mb-4">
+          {typeof description === 'string' ? (
+            <p>{description}</p>
+          ) : (
+            description
+          )}
+        </div>
         
         {children && (
           <div className="mt-2">

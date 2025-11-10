@@ -7,10 +7,13 @@ import Card from '../../components/Card';
 import { useState, useEffect } from 'react';
 
 interface Realisation {
+  id: number;
   titre: string;
   description: string;
   date: string;
-  responsable: string;
+  image: string;
+  domaine: string;
+  participants: number;
 }
 
 export default function Realisations() {
@@ -25,14 +28,66 @@ export default function Realisations() {
   return (
     <div>
       <Header />
-      <Section title="Réalisations">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-          {realisations.map((realisation, index) => (
-            <Card
-              key={index}
-              title={realisation.titre}
-              description={`${realisation.date} - ${realisation.responsable}: ${realisation.description}`}
-            />
+      <Section title="Nos Réalisations" className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {realisations.map((realisation) => (
+            <div key={realisation.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+              {/* Image en pleine largeur avec hauteur ajustée */}
+              <div className="w-full h-64 overflow-hidden bg-gray-100">
+                <img 
+                  src={`/images/realisations/${realisation.image}`}
+                  alt={realisation.titre}
+                  className="w-full h-full object-contain object-center p-2"
+                  loading="lazy"
+                  onError={(e) => {
+                    // Fallback si l'image ne se charge pas
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = '/images/placeholder-realisation.jpg';
+                  }}
+                />
+              </div>
+              
+              {/* Contenu de la carte - version plus compacte */}
+              <div className="p-4 flex-1 flex flex-col">
+                <div className="flex justify-between items-start gap-2">
+                  <h3 className="text-lg font-semibold text-gray-900 line-clamp-2" title={realisation.titre}>
+                    {realisation.titre}
+                  </h3>
+                  <span className="flex-shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
+                    {realisation.domaine}
+                  </span>
+                </div>
+                
+                <div className="mt-2 text-xs text-gray-500 flex items-center">
+                  <span>
+                    {new Date(realisation.date).toLocaleDateString('fr-FR', { 
+                      day: '2-digit',
+                      month: 'short', 
+                      year: 'numeric'
+                    })}
+                  </span>
+                  <span className="mx-1.5">•</span>
+                  <span>{realisation.participants} participants</span>
+                </div>
+                
+                <p className="mt-2 text-sm text-gray-600 line-clamp-3" title={realisation.description}>
+                  {realisation.description}
+                </p>
+                
+                <div className="mt-3 pt-3 border-t border-gray-100">
+                  <button 
+                    className="text-primary-600 hover:text-primary-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
+                    onClick={() => {
+                      // Gérer le clic sur le bouton
+                      console.log('Voir plus pour :', realisation.titre);
+                    }}
+                  >
+                    En savoir plus
+                  </button>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </Section>

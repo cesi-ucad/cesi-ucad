@@ -1,14 +1,56 @@
 [
   {
-    "titre": "Formation Git et GitHub",
-    "date": "2025-02-02",
-    "responsable": "Malick BA",
-    "description": "Atelier de formation destiné aux étudiants sur la gestion de version et la collaboration."
+    "id": 1,
+    "titre": "Formation JavaScript",
+    "date": "2025-01-15",
+    "image": "realisation-formation-javascript.jpg",
+    "domaine": "Développement Web",
+    "description": "Ateliers pratiques pour maîtriser les bases et concepts avancés de JavaScript.",
+    "participants": 25
   },
   {
-    "titre": "Hackathon CESI Innov 2025",
-    "date": "2025-03-10",
-    "responsable": "Commission Innovation",
-    "description": "Compétition inter-niveaux autour de la création d'applications utiles à la société."
+    "id": 2,
+    "titre": "Formation Python",
+    "date": "2025-01-22",
+    "image": "realisation-formation-python.jpg",
+    "domaine": "Science des Données",
+    "description": "Découverte de Python et de ses applications en science des données.",
+    "participants": 30
+  },
+  {
+    "id": 3,
+    "titre": "Formation Git/GitHub",
+    "date": "2025-02-05",
+    "image": "realisation-formation-gitgithub.jpg",
+    "domaine": "Outils de Développement",
+    "description": "Maîtrise du contrôle de version et de la collaboration sur GitHub.",
+    "participants": 28
+  },
+  {
+    "id": 4,
+    "titre": "Formation Spring Boot",
+    "date": "2025-02-12",
+    "image": "realisation-formation-springboot.jpg",
+    "domaine": "Développement Backend",
+    "description": "Développement d'API REST avec Spring Boot et Java.",
+    "participants": 20
+  },
+  {
+    "id": 5,
+    "titre": "Formation Fullstack",
+    "date": "2025-02-19",
+    "image": "realisation-formation-angularnest.jpg",
+    "domaine": "Développement Fullstack",
+    "description": "Développement d'applications complètes avec Angular et NestJS.",
+    "participants": 18
+  },
+  {
+    "id": 6,
+    "titre": "Journée de la Femme",
+    "date": "2025-03-08",
+    "image": "realisation-journeedelafemme.jpg",
+    "domaine": "Événement",
+    "description": "Célébration et mise en avant des femmes dans la technologie.",
+    "participants": 50
   }
 ]

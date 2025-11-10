@@ -1,9 +1,65 @@
 {
   "nom": "Club CESI UCAD",
-  "description": "Club des Étudiants de la Section Informatique de l’UCAD.",
-  "missions": [
-    "Promouvoir l’excellence académique et l’innovation numérique",
+  "description": "Club des Étudiants de la Section Informatique de l'UCAD.",
+  "mission": [
+    {
+      "titre": "Communauté étudiante",
+      "description": "Fédérer les étudiants en informatique autour de projets innovants et d'échanges constructifs."
+    },
+    {
+      "titre": "Formation des leaders",
+      "description": "Développer les compétences de leadership et d'innovation technologique."
+    },
+    {
+      "titre": "Partage des connaissances",
+      "description": "Encourager la transmission du savoir entre les différentes promotions."
+    },
+    {
+      "titre": "Projets collaboratifs",
+      "description": "Mener à bien des projets concrets en équipe pluridisciplinaire."
+    }
+  ],
+  "vision": [
+    {
+      "titre": "Excellence académique",
+      "description": "Être reconnu comme une référence en matière de formation en informatique en Afrique de l'Ouest."
+    },
+    {
+      "titre": "Innovation technologique",
+      "description": "Développer des solutions innovantes répondant aux défis de notre société."
+    },
+    {
+      "titre": "Professionnels engagés",
+      "description": "Former des professionnels compétents, éthiques et responsables."
+    },
+    {
+      "titre": "Impact régional",
+      "description": "Contribuer activement au développement technologique de la région."
+    }
+  ],
+  "objectifs": [
+    "Promouvoir l'excellence académique et l'innovation numérique",
     "Renforcer la solidarité entre étudiants en informatique",
-    "Encourager la recherche, la créativité et le leadership"
+    "Encourager la recherche, la créativité et le leadership",
+    "Organiser des événements et formations en lien avec l'informatique",
+    "Créer un réseau d'anciens étudiants actif et solidaire"
+  ],
+  "valeurs": [
+    {
+      "titre": "Excellence",
+      "description": "Atteindre les plus hauts standards dans tous nos projets et formations."
+    },
+    {
+      "titre": "Innovation",
+      "description": "Encourager la créativité et les solutions technologiques innovantes."
+    },
+    {
+      "titre": "Partage",
+      "description": "Favoriser l'échange des connaissances entre les membres."
+    },
+    {
+      "titre": "Solidarité",
+      "description": "Bâtir une communauté soudée et solidaire."
+    }
   ]
 }

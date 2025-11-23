@@ -6,13 +6,6 @@ import Footer from "../../components/Footer";
 import Section from "../../components/Section";
 
 export default function ContactPage() {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(
-      "Merci — le formulaire est en local. Je peux activer l'envoi si vous le souhaitez."
-    );
-  };
-
   return React.createElement(
     "div",
     { className: "min-h-screen bg-white" },
@@ -30,7 +23,26 @@ export default function ContactPage() {
         ),
         React.createElement(
           "form",
-          { className: "grid grid-cols-1 gap-4", onSubmit: handleSubmit },
+          {
+            className: "grid grid-cols-1 gap-4",
+            action: "https://formsubmit.co/ucadcesi@gmail.com",
+            method: "POST",
+          },
+          React.createElement("input", {
+            type: "hidden",
+            name: "_subject",
+            value: "Nouveau message du site CESI UCAD",
+          }),
+          React.createElement("input", {
+            type: "hidden",
+            name: "_captcha",
+            value: "false",
+          }),
+          React.createElement("input", {
+            type: "hidden",
+            name: "_next",
+            value: "https://cesi-ucad.sn/contact?success=true",
+          }),
           React.createElement(
             "label",
             { className: "block" },
@@ -101,10 +113,10 @@ export default function ContactPage() {
                 React.createElement(
                   "a",
                   {
-                    href: "mailto:contact@cesi-ucad.sn",
+                    href: "mailto:ucadcesi@gmail.com",
                     className: "text-primary-600",
                   },
-                  "contact@cesi-ucad.sn"
+                  "ucadcesi@gmail.com"
                 )
               ),
               React.createElement(

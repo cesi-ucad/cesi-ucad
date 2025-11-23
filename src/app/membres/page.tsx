@@ -1,141 +1,70 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Section from '../../components/Section';
-import Card from '../../components/Card';
-import Button from '../../components/Button';
+import fs from "fs";
+import path from "path";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Section from "../../components/Section";
+import Card from "../../components/Card";
 
 interface Membre {
+  id?: string;
   nom: string;
-  niveau: string;
-  specialite: string;
+  "annee d'admission": number;
   photo: string;
-  projets: string[];
+  github: string;
 }
 
 export default function Membres() {
-  const [membres, setMembres] = useState<Membre[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    nom: '',
-    email: '',
-    niveau: '',
-    specialite: ''
-  });
+  // Server component: read all JSON files from public/data/membres
+  const membresDir = path.join(process.cwd(), "public", "data", "membres");
+  let membres: Membre[] = [];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Ici, vous pouvez ajouter la logique pour soumettre le formulaire
-    alert('Demande d\'adhésion soumise !');
-    setFormData({ nom: '', email: '', niveau: '', specialite: '' });
-  };
-
-  useEffect(() => {
-    fetch('/data/membres.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Erreur lors du chargement des membres');
+  try {
+    const files = fs.existsSync(membresDir) ? fs.readdirSync(membresDir) : [];
+    const jsonFiles = files.filter((f) => f.endsWith(".json"));
+    membres = jsonFiles
+      .map((file) => {
+        try {
+          const raw = fs.readFileSync(path.join(membresDir, file), "utf8");
+          const parsed = JSON.parse(raw) as Membre;
+          // ensure photo path starts with /images if not absolute
+          if (parsed.photo && !parsed.photo.startsWith("/")) {
+            parsed.photo = `/${parsed.photo}`;
+          }
+          if (!parsed.id) parsed.id = file.replace(/\.json$/, "");
+          return parsed;
+        } catch (e) {
+          console.error("Failed to read or parse:", file, e);
+          return null;
         }
-        return response.json();
       })
-      .then(data => setMembres(data))
-      .catch(err => {
-        console.error('Erreur:', err);
-        setError(err instanceof Error ? err.message : 'Une erreur est survenue');
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) return <div>Chargement des membres...</div>;
-  if (error) return <div>Erreur: {error}</div>;
+      .filter((m): m is Membre => !!m);
+  } catch (e) {
+    console.error("Could not read members directory:", e);
+    membres = [];
+  }
 
   return (
     <div>
       <Header />
       <Section title="Nos Membres">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {membres.map((membre, index) => (
+          {membres.map((membre) => (
             <Card
-              key={index}
+              key={membre.id ?? membre.nom}
               title={membre.nom}
-              description={`${membre.niveau} - ${membre.specialite}`}
+              description={`a rejoint la Section Informatique en ${membre["annee d'admission"]}`}
               image={membre.photo}
             >
               <div>
-                <h4 className="font-semibold mb-2 text-sm sm:text-base">Projets :</h4>
-                <ul className="list-disc list-inside text-xs sm:text-sm">
-                  {membre.projets.map((projet, idx) => (
-                    <li key={idx}>{projet}</li>
-                  ))}
-                </ul>
+                <h4 className="font-semibold mb-2 text-sm sm:text-base">
+                  GitHub :
+                </h4>
+                <a href={membre.github} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                  {membre.github}
+                </a>
               </div>
             </Card>
           ))}
-        </div>
-      </Section>
-      <Section title="Adhérer au Club" className="bg-gray-50">
-        <div className="max-w-md mx-auto">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="nom" className="block text-sm font-medium text-gray-700">Nom</label>
-              <input
-                type="text"
-                id="nom"
-                name="nom"
-                value={formData.nom}
-                onChange={handleInputChange}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-            <div>
-              <label htmlFor="niveau" className="block text-sm font-medium text-gray-700">Niveau</label>
-              <input
-                type="text"
-                id="niveau"
-                name="niveau"
-                value={formData.niveau}
-                onChange={handleInputChange}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-            <div>
-              <label htmlFor="specialite" className="block text-sm font-medium text-gray-700">Spécialité</label>
-              <input
-                type="text"
-                id="specialite"
-                name="specialite"
-                value={formData.specialite}
-                onChange={handleInputChange}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-            <Button type="submit" variant="primary" size="large">
-              Soumettre la demande d&apos;adhésion
-            </Button>
-          </form>
         </div>
       </Section>
       <Footer />

@@ -8,7 +8,10 @@ import { useState, useEffect } from 'react';
 interface ClubData {
   nom: string;
   description: string;
-  missions: string[];
+  mission: { titre: string; description: string }[];
+  vision: { titre: string; description: string }[];
+  objectifs: string[];
+  valeurs: { titre: string; description: string }[];
 }
 
 export default function Club() {
@@ -41,12 +44,46 @@ export default function Club() {
       <main>
         <Section title={club.nom}>
           <p className="text-center mb-6">{club.description}</p>
-          <Section title="Missions">
-            <ul className="list-disc list-inside space-y-2 text-sm sm:text-base md:text-lg">
-              {club.missions && club.missions.map((mission, index) => (
-                <li key={index}>{mission}</li>
+
+          <Section title="Notre Mission">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {club.mission && club.mission.map((item, index) => (
+                <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2">{item.titre}</h4>
+                  <p className="text-sm">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </Section>
+
+          <Section title="Notre Vision">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {club.vision && club.vision.map((item, index) => (
+                <div key={index} className="bg-blue-50 p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2">{item.titre}</h4>
+                  <p className="text-sm">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </Section>
+
+          <Section title="Nos Objectifs">
+            <ul className="list-disc list-inside space-y-2 text-sm sm:text-base">
+              {club.objectifs && club.objectifs.map((objectif, index) => (
+                <li key={index}>{objectif}</li>
               ))}
             </ul>
+          </Section>
+
+          <Section title="Nos Valeurs">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {club.valeurs && club.valeurs.map((valeur, index) => (
+                <div key={index} className="bg-green-50 p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2">{valeur.titre}</h4>
+                  <p className="text-sm">{valeur.description}</p>
+                </div>
+              ))}
+            </div>
           </Section>
         </Section>
       </main>

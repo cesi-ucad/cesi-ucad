@@ -63,73 +63,71 @@ export default function Ecole() {
     <>
       <Header />
       <main>
-        <Section title="Informations sur l'École">
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{school.nom} {school.sigle && `(${school.sigle})`}</h2>
-            <p className="text-gray-700 dark:text-gray-300">{school.description}</p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              <div>
-                <h3 className="font-semibold">Contacts</h3>
-                <p className="mt-1">
-                  <a href={`mailto:${school.contacts.email}`} className="text-blue-600 hover:underline">
-                    {school.contacts.email}
-                  </a>
-                </p>
-                <p className="mt-1">
-                  <a href={`tel:${school.contacts.telephone}`} className="text-blue-600 hover:underline">
-                    {school.contacts.telephone}
-                  </a>
-                </p>
-                <p className="mt-1">
-                  <a href={school.contacts.site_web} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                    {school.contacts.site_web}
-                  </a>
-                </p>
-                <p className="mt-2">{school.contacts.adresse}</p>
-              </div>
-              
+        <Section title={`${school.nom} (${school.sigle})`}>
+          <p className="text-center mb-6">{school.description}</p>
+
+          <Section title="Informations Générales">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {school.departement && (
-                <div>
-                  <h3 className="font-semibold">Département</h3>
-                  <p>{school.departement}</p>
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2">Département</h4>
+                  <p className="text-sm">{school.departement}</p>
                 </div>
               )}
-              
               {school.filiere_principale && (
-                <div>
-                  <h3 className="font-semibold">Filière principale</h3>
-                  <p>{school.filiere_principale}</p>
+                <div className="bg-green-50 p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2">Filière Principale</h4>
+                  <p className="text-sm">{school.filiere_principale}</p>
                 </div>
               )}
-              
               {school.localisation && (
-                <div className="md:col-span-2">
-                  <h3 className="font-semibold">Localisation</h3>
-                  <p>{school.localisation}</p>
+                <div className="bg-yellow-50 p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2">Localisation</h4>
+                  <p className="text-sm">{school.localisation}</p>
                 </div>
               )}
             </div>
-          </div>
-        </Section>
+          </Section>
 
-        <Section title="Spécialisations">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {school.specialisations.map((specialisation, index) => (
-              <Card
-                key={index}
-                title={`${specialisation.nom} (${specialisation.niveau})`}
-                description={
-                  <>
-                    <p className="mb-2">{specialisation.description}</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Durée: {specialisation.duree}
-                    </p>
-                  </>
-                }
-              />
-            ))}
-          </div>
+          <Section title="Contacts">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-purple-50 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">Email</h4>
+                <a href={`mailto:${school.contacts.email}`} className="text-blue-600 hover:underline text-sm">
+                  {school.contacts.email}
+                </a>
+              </div>
+              <div className="bg-red-50 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">Téléphone</h4>
+                <a href={`tel:${school.contacts.telephone}`} className="text-blue-600 hover:underline text-sm">
+                  {school.contacts.telephone}
+                </a>
+              </div>
+              <div className="bg-indigo-50 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">Site Web</h4>
+                <a href={school.contacts.site_web} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm">
+                  {school.contacts.site_web}
+                </a>
+              </div>
+              <div className="bg-pink-50 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">Adresse</h4>
+                <p className="text-sm">{school.contacts.adresse}</p>
+              </div>
+            </div>
+          </Section>
+
+          <Section title="Spécialisations">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {school.specialisations.map((specialisation, index) => (
+                <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2">{specialisation.nom}</h4>
+                  <p className="text-sm mb-2">{specialisation.description}</p>
+                  <p className="text-sm text-gray-600">Niveau: {specialisation.niveau}</p>
+                  <p className="text-sm text-gray-600">Durée: {specialisation.duree}</p>
+                </div>
+              ))}
+            </div>
+          </Section>
         </Section>
       </main>
       <Footer />

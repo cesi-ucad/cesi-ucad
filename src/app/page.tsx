@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Head from 'next/head';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Section from '../components/Section';
-import Card from '../components/Card';
+import { useState, useEffect } from "react";
+import Head from "next/head";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Section from "../components/Section";
+import Card from "../components/Card";
 // Les données sont maintenant chargées dynamiquement via des appels fetch
 
 // Fonction utilitaire pour le chargement paresseux des images
 const useLazyLoading = () => {
   useEffect(() => {
-    if ('loading' in HTMLImageElement.prototype) {
+    if ("loading" in HTMLImageElement.prototype) {
       const images = document.querySelectorAll('img[loading="lazy"]');
-      images.forEach(img => {
-        img.setAttribute('loading', 'lazy');
+      images.forEach((img) => {
+        img.setAttribute("loading", "lazy");
       });
     }
   }, []);
@@ -78,7 +78,7 @@ export default function Home() {
     const fetchData = async () => {
       try {
         // Vérifier si on est côté client
-        if (typeof window === 'undefined') {
+        if (typeof window === "undefined") {
           return;
         }
 
@@ -87,7 +87,9 @@ export default function Home() {
           try {
             const response = await fetch(url);
             if (!response.ok) {
-              console.error(`Erreur lors du chargement de ${url}: ${response.statusText}`);
+              console.error(
+                `Erreur lors du chargement de ${url}: ${response.statusText}`
+              );
               return null;
             }
             return await response.json();
@@ -98,16 +100,17 @@ export default function Home() {
         };
 
         // Charger les données en parallèle
-        const [clubData, schoolData, equipesData, realisationsData] = await Promise.all([
-          fetchWithErrorHandling('/data/club.json'),
-          fetchWithErrorHandling('/data/ecole.json'),
-          fetchWithErrorHandling('/data/equipes.json'),
-          fetchWithErrorHandling('/data/realisations.json')
-        ]);
+        const [clubData, schoolData, equipesData, realisationsData] =
+          await Promise.all([
+            fetchWithErrorHandling("/data/club.json"),
+            fetchWithErrorHandling("/data/ecole.json"),
+            fetchWithErrorHandling("/data/equipes.json"),
+            fetchWithErrorHandling("/data/realisations.json"),
+          ]);
 
         // Vérifier que les données essentielles sont présentes
         if (!clubData || !schoolData) {
-          throw new Error('Impossible de charger les données essentielles');
+          throw new Error("Impossible de charger les données essentielles");
         }
 
         // Mettre à jour les états
@@ -117,8 +120,10 @@ export default function Home() {
         setRealisations(realisationsData || []);
         setLoading(false);
       } catch (err) {
-        console.error('Erreur lors du chargement des données:', err);
-        setError('Une erreur est survenue lors du chargement des données. Veuillez réessayer.');
+        console.error("Erreur lors du chargement des données:", err);
+        setError(
+          "Une erreur est survenue lors du chargement des données. Veuillez réessayer."
+        );
         setLoading(false);
       }
     };
@@ -131,7 +136,9 @@ export default function Home() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Chargement des données en cours...</p>
+          <p className="mt-4 text-gray-600">
+            Chargement des données en cours...
+          </p>
         </div>
       </div>
     );
@@ -142,9 +149,11 @@ export default function Home() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center p-6 max-w-md mx-auto bg-red-50 rounded-lg">
           <div className="text-red-600 text-4xl mb-3">⚠️</div>
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Erreur de chargement</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">
+            Erreur de chargement
+          </h2>
           <p className="text-gray-600 mb-4">{error}</p>
-          <button 
+          <button
             onClick={() => window.location.reload()}
             className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
           >
@@ -159,7 +168,9 @@ export default function Home() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-600">Aucune donnée disponible pour le moment.</p>
+          <p className="text-gray-600">
+            Aucune donnée disponible pour le moment.
+          </p>
         </div>
       </div>
     );
@@ -169,20 +180,35 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Head>
         <title>CESI UCAD - Club des Étudiants de la Section Informatique</title>
-        <meta name="description" content="Découvrez le CESI UCAD, le Club des Étudiants de la Section Informatique de l'Université Cheikh Anta Diop de Dakar. Excellence académique, innovation et communauté dynamique." />
+        <meta
+          name="description"
+          content="Découvrez le CESI UCAD, le Club des Étudiants de la Section Informatique de l'Université Cheikh Anta Diop de Dakar. Excellence académique, innovation et communauté dynamique."
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="keywords" content="CESI, UCAD, Club Informatique, Étudiants, Sénégal, Dakar, Université Cheikh Anta Diop" />
-        <meta property="og:title" content="CESI UCAD - Club des Étudiants de la Section Informatique" />
-        <meta property="og:description" content="Découvrez le CESI UCAD, le Club des Étudiants de la Section Informatique de l'UCAD." />
+        <meta
+          name="keywords"
+          content="CESI, UCAD, Club Informatique, Étudiants, Sénégal, Dakar, Université Cheikh Anta Diop"
+        />
+        <meta
+          property="og:title"
+          content="CESI UCAD - Club des Étudiants de la Section Informatique"
+        />
+        <meta
+          property="og:description"
+          content="Découvrez le CESI UCAD, le Club des Étudiants de la Section Informatique de l'UCAD."
+        />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://cesi-ucad.sn" />
         <meta property="og:image" content="/images/etudiants-cesi.jpg" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      
+
       {/* Section Hero avec image des étudiants */}
-      <section className="relative h-screen flex items-center justify-center bg-primary-900 overflow-hidden" style={{ overflow: 'hidden' }}>
+      <section
+        className="relative h-screen flex items-center justify-center bg-primary-900 overflow-hidden"
+        style={{ overflow: "hidden" }}
+      >
         {/* Image de fond */}
         <div className="absolute inset-0 z-0">
           <img
@@ -190,21 +216,21 @@ export default function Home() {
             alt="Étudiants membres du CESI UCAD"
             className="w-full h-full object-cover"
             style={{
-              filter: 'brightness(0.7) contrast(1.1)',
-              objectPosition: 'center 20%',
-              marginTop: '-10%',
-              height: '110%',
-              width: '100%'
+              filter: "brightness(0.7) contrast(1.1)",
+              objectPosition: "center 20%",
+              marginTop: "-10%",
+              height: "110%",
+              width: "100%",
             }}
             loading="eager"
           />
           {/* Overlay bleu avec opacité réduite */}
-          <div 
-            className="absolute inset-0 bg-primary-900" 
+          <div
+            className="absolute inset-0 bg-primary-900"
             style={{ opacity: 0.3 }}
           ></div>
         </div>
-        
+
         {/* Contenu centré */}
         <div className="relative z-10 px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl lg:text-7xl">
@@ -212,8 +238,9 @@ export default function Home() {
             <span className="block text-white mt-2">CESI UCAD</span>
           </h1>
           <p className="mt-6 max-w-2xl mx-auto text-xl text-white sm:text-2xl md:mt-8 md:max-w-3xl">
-            Le Club des Étudiants de la Section Informatique de l'UCAD. 
-            Une communauté dynamique dédiée à l'excellence académique et à l'innovation technologique.
+            Le Club des Étudiants de la Section Informatique de l'UCAD. Une
+            communauté dynamique dédiée à l'excellence académique et à
+            l'innovation technologique.
           </p>
           <div className="mt-10 max-w-md mx-auto sm:flex sm:justify-center md:mt-12 space-y-4 sm:space-y-0 sm:space-x-6">
             <div>
@@ -233,23 +260,35 @@ export default function Home() {
               </a>
             </div>
           </div>
-          
+
           {/* Flèche de défilement */}
           <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
             <a href="#a-propos" className="text-white">
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              <svg
+                className="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                />
               </svg>
             </a>
           </div>
         </div>
       </section>
-      
+
       {/* Section À propos */}
       <section id="a-propos" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:text-center">
-            <h2 className="text-base text-primary-600 font-semibold tracking-wide uppercase">Notre Club</h2>
+            <h2 className="text-base text-primary-600 font-semibold tracking-wide uppercase">
+              Notre Club
+            </h2>
             <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
               {club?.nom}
             </p>
@@ -270,9 +309,7 @@ export default function Home() {
                     className="h-full flex flex-col"
                   >
                     <div className="flex-1 flex flex-col">
-                      <div className="mt-4 mb-2">
-                        {/* Icône supprimée */}
-                      </div>
+                      <div className="mt-4 mb-2">{/* Icône supprimée */}</div>
                     </div>
                   </Card>
                 ))}
@@ -290,9 +327,7 @@ export default function Home() {
                     className="h-full flex flex-col"
                   >
                     <div className="flex-1 flex flex-col">
-                      <div className="mt-4 mb-2">
-                        {/* Icône supprimée */}
-                      </div>
+                      <div className="mt-4 mb-2">{/* Icône supprimée */}</div>
                     </div>
                   </Card>
                 ))}
@@ -310,9 +345,7 @@ export default function Home() {
                     className="h-full flex flex-col"
                   >
                     <div className="flex-1 flex flex-col">
-                      <div className="mt-4 mb-2">
-                        {/* Icône supprimée */}
-                      </div>
+                      <div className="mt-4 mb-2">{/* Icône supprimée */}</div>
                     </div>
                   </Card>
                 ))}
@@ -321,7 +354,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
       <main className="flex-grow">
         {/* Section photo pleine largeur */}
         <div className="relative w-full h-[70vh] min-h-[600px] overflow-hidden">
@@ -330,18 +363,23 @@ export default function Home() {
             alt="Étudiants du CESI UCAD"
             className="w-full h-full object-cover"
             style={{
-              filter: 'brightness(0.7) contrast(1.1)',
-              objectPosition: 'center 20%',
-              objectFit: 'cover',
-              width: '100%',
-              height: '100%'
+              filter: "brightness(0.7) contrast(1.1)",
+              objectPosition: "center 20%",
+              objectFit: "cover",
+              width: "100%",
+              height: "100%",
             }}
             loading="lazy"
           />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center px-4">
-              <h2 className="text-3xl font-bold text-white sm:text-4xl">Rejoignez notre communauté</h2>
-              <p className="mt-4 text-xl text-white max-w-2xl">Découvrez un environnement dynamique dédié à l'excellence académique et à l'innovation</p>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl">
+                Rejoignez notre communauté
+              </h2>
+              <p className="mt-4 text-xl text-white max-w-2xl">
+                Découvrez un environnement dynamique dédié à l'excellence
+                académique et à l'innovation
+              </p>
             </div>
           </div>
         </div>
@@ -354,18 +392,23 @@ export default function Home() {
               <div className="p-6">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-32 h-32 mb-4 rounded-full bg-white p-2 shadow-md flex items-center justify-center">
-                    <img 
-                      src="/images/logo-InspiCode.jpg" 
-                      alt="Logo InspiCode" 
+                    <img
+                      src="/images/logo-InspiCode.jpg"
+                      alt="Logo InspiCode"
                       className="w-full h-full object-contain"
                       loading="lazy"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">InspiCode</h3>
-                  <p className="text-primary-600 font-medium mb-4">Développement & Innovation</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    InspiCode
+                  </h3>
+                  <p className="text-primary-600 font-medium mb-4">
+                    Développement & Innovation
+                  </p>
                   <p className="text-gray-600">
-                    L'équipe dédiée au développement web, mobile et à l'innovation technologique.
-                    Nous transformons les idées en solutions numériques performantes.
+                    L'équipe dédiée au développement web, mobile et à
+                    l'innovation technologique. Nous transformons les idées en
+                    solutions numériques performantes.
                   </p>
                 </div>
               </div>
@@ -376,18 +419,21 @@ export default function Home() {
               <div className="p-6">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-32 h-32 mb-4 rounded-full bg-white p-2 shadow-md flex items-center justify-center">
-                    <img 
-                      src="/images/logo-skAi.jpg" 
-                      alt="Logo skAi" 
+                    <img
+                      src="/images/logo-skAi.jpg"
+                      alt="Logo skAi"
                       className="w-full h-full object-contain"
                       loading="lazy"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">skAi</h3>
-                  <p className="text-primary-600 font-medium mb-4">Intelligence Artificielle</p>
+                  <p className="text-primary-600 font-medium mb-4">
+                    Intelligence Artificielle
+                  </p>
                   <p className="text-gray-600">
-                    Spécialistes en intelligence artificielle et science des données.
-                    Nous explorons les possibilités de l'IA pour résoudre des problèmes complexes.
+                    Spécialistes en intelligence artificielle et science des
+                    données. Nous explorons les possibilités de l'IA pour
+                    résoudre des problèmes complexes.
                   </p>
                 </div>
               </div>
@@ -400,35 +446,81 @@ export default function Home() {
             {loading ? (
               <div className="text-center py-12">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-                <p className="mt-4 text-gray-600">Chargement des réalisations...</p>
+                <p className="mt-4 text-gray-600">
+                  Chargement des réalisations...
+                </p>
               </div>
             ) : error ? (
               <div className="text-center py-12 text-red-600">
                 <p>Erreur lors du chargement des réalisations : {error}</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
                 {realisations.map((realisation) => (
-                  <div key={realisation.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    <div className="h-48 overflow-hidden">
+                  <div
+                    key={realisation.id}
+                    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
+                  >
+                    {/* Image en pleine largeur avec hauteur ajustée */}
+                    <div className="w-full h-64 overflow-hidden bg-gray-100">
                       <img
                         src={`/images/${realisation.image}`}
                         alt={realisation.titre}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain object-center p-2"
                         loading="lazy"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.onerror = null;
+                          target.src = "/images/etudiants-cesi.jpg";
+                        }}
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold text-gray-900">{realisation.titre}</h3>
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
+
+                    {/* Contenu de la carte - version plus compacte */}
+                    <div className="p-4 flex-1 flex flex-col">
+                      <div className="flex justify-between items-start gap-2">
+                        <h3
+                          className="text-lg font-semibold text-gray-900 line-clamp-2"
+                          title={realisation.titre}
+                        >
+                          {realisation.titre}
+                        </h3>
+                        <span className="flex-shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
                           {realisation.domaine}
                         </span>
                       </div>
-                      <p className="text-gray-600 mb-3">{realisation.description}</p>
-                      <div className="flex justify-between items-center text-sm text-gray-500">
-                        <span>{new Date(realisation.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+
+                      <div className="mt-2 text-xs text-gray-500 flex items-center">
+                        <span>
+                          {new Date(realisation.date).toLocaleDateString(
+                            "fr-FR",
+                            {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                            }
+                          )}
+                        </span>
+                        <span className="mx-1.5">•</span>
                         <span>{realisation.participants} participants</span>
+                      </div>
+
+                      <p
+                        className="mt-2 text-sm text-gray-600 line-clamp-3"
+                        title={realisation.description}
+                      >
+                        {realisation.description}
+                      </p>
+
+                      <div className="mt-3 pt-3 border-t border-gray-100">
+                        <button
+                          className="text-primary-600 hover:text-primary-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
+                          onClick={() => {
+                            console.log("Voir plus pour :", realisation.titre);
+                          }}
+                        >
+                          En savoir plus
+                        </button>
                       </div>
                     </div>
                   </div>

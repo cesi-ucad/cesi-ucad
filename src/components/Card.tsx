@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import ImageWithFallback from "./ImageWithFallback";
 
 interface CardProps {
   title: string;
@@ -36,11 +37,14 @@ const Card: React.FC<CardProps> = ({
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       {image && (
-        <div className="w-full h-40 overflow-hidden bg-gray-100 mb-4 flex items-center justify-center">
-          <img
+        <div className="w-full aspect-square overflow-hidden bg-gray-100 mb-4 flex items-center justify-center">
+          <ImageWithFallback
             src={image}
             alt={imageAlt ?? title}
-            className={`w-full h-full object-cover ${imageClassName ?? ""}`}
+            className={`object-cover w-full h-full ${imageClassName ?? ""}`}
+            fallbackSrc="/images/membres/fallback.svg"
+            width={500}
+            height={500}
           />
         </div>
       )}

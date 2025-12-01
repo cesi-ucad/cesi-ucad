@@ -1,20 +1,20 @@
 {
-  "nom": "Université Cheikh Anta Diop de Dakar",
-  "sigle": "UCAD",
-  "description": "L'Université Cheikh Anta Diop de Dakar est la principale université du Sénégal et l'une des plus prestigieuses d'Afrique de l'Ouest.",
-  "departement": "Département d'Informatique et de Télécommunications",
+  "nom": "La Section Informatique de l'Université Cheikh Anta Diop de Dakar",
+  "sigle": "SI-UCAD",
+  "description": "L'Université Cheikh Anta Diop de Dakar est la principale université du Sénégal et l'une des plus prestigieuses d'Afrique de l'Ouest. La Section Informatique offre une formation de qualité en informatique. Elle propose plusieurs spécialisations couvrant divers domaines de l'informatique, adaptées aux besoins du marché du travail et aux avancées technologiques.",
+  "departement": "Département de Mathematiques & Informatique (DMI)",
   "filiere_principale": "Informatique",
   "localisation": "Dakar, Sénégal",
   "specialisations": [
     {
-      "nom": "Informatique Fondamentale",
+      "nom": "Informatique",
       "description": "Formation approfondie en algorithmique, structures de données et théorie de l'information.",
       "duree": "3 ans",
       "niveau": "Licence"
     },
     {
-      "nom": "Génie Logiciel",
-      "description": "Spécialisation en conception, développement et maintenance des logiciels.",
+      "nom": "Ingénierie Logicielle et Sécurité Applicative",
+      "description": "Spécialisation en développement de logiciels sécurisés et fiables.",
       "duree": "2 ans",
       "niveau": "Master"
     },
@@ -25,28 +25,28 @@
       "niveau": "Master"
     },
     {
-      "nom": "Intelligence Artificielle et Science des Données",
-      "description": "Spécialisation en machine learning, data mining et intelligence artificielle.",
+      "nom": "Systèmes d'Information et Répartis",
+      "description": "Spécialisation en conception et gestion des systèmes d'information distribués.",
       "duree": "2 ans",
       "niveau": "Master"
     },
     {
-      "nom": "Sécurité Informatique",
-      "description": "Formation en cybersécurité et protection des systèmes d'information.",
-      "duree": "2 ans",
-      "niveau": "Master"
-    },
-    {
-      "nom": "Informatique Décisionnelle",
+      "nom": "Business Intelligence",
       "description": "Spécialisation en analyse de données et aide à la décision.",
+      "duree": "2 ans",
+      "niveau": "Master"
+    },
+    {
+      "nom": "Bioinformatique-Biomatématiques",
+      "description": "Spécialisation à l'intersection de la biologie et de l'informatique.",
       "duree": "2 ans",
       "niveau": "Master"
     }
   ],
   "contacts": {
-    "email": "info@ucad.sn",
+    "email": "sectioninformatique@ucad.edu.sn",
     "telephone": "+221 77 415 09 64",
     "adresse": "Campus Universitaire de l'UCAD, BP 5005, Dakar-Fann, Sénégal",
-    "site_web": "https://www.ucad.sn"
+    "site_web": "https://www.section.ucad.sn"
   }
 }

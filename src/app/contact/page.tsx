@@ -125,8 +125,8 @@ export default function ContactPage() {
                 "Téléphone : ",
                 React.createElement(
                   "a",
-                  { href: "tel:+221000000000", className: "text-primary-600" },
-                  "+221 00 000 0000"
+                  { href: "tel:+2210774150964", className: "text-primary-600" },
+                  "+221 77 415 09 64"
                 )
               )
             )

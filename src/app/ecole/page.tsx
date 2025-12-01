@@ -3,7 +3,6 @@
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Section from '../../components/Section';
-import Card from '../../components/Card';
 import { useState, useEffect } from 'react';
 
 interface Specialisation {

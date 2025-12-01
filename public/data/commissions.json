@@ -1,8 +1,11 @@
 [
   { "nom": "Commission Pédagogique", "president": "Malick BA" },
-  { "nom": "Commission Marketing & Communication", "president": "Pape Moussa SENE" },
+  {
+    "nom": "Commission Marketing & Communication",
+    "president": "Pape Moussa SENE"
+  },
   { "nom": "Commission Féminine", "president": "Fatimatou FALL" },
   { "nom": "Commission Relations Extérieures", "president": "Khadim NDIAYE" },
-  { "nom": "Commission Sociale", "president": "Amadou DIENG" }
-
+  { "nom": "Commission Sociale", "president": "Amadou DIENG" },
+  { "nom": "Commission Sportive", "president": "Ahmadou MBOW" }
 ]

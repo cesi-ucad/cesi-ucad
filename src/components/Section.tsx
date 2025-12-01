@@ -1,20 +1,24 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 interface SectionProps {
   title?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }
 
-const Section: React.FC<SectionProps> = ({ title, children, className = '' }) => {
+const Section: React.FC<SectionProps> = ({
+  title,
+  children,
+  className = "",
+}) => {
   return (
     <motion.section
       className={`py-6 sm:py-8 md:py-12 ${className}`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

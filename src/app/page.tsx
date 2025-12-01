@@ -59,17 +59,13 @@ interface Realisation {
   participants: number;
 }
 
-interface Equipe {
-  nom: string;
-  domaine: string;
-  description: string;
-}
+// `Equipe` interface removed — équipes state is not used in the UI
 
 export default function Home() {
   useLazyLoading(); // Activer le chargement paresseux
   const [school, setSchool] = useState<SchoolData | null>(null);
   const [club, setClub] = useState<ClubData | null>(null);
-  const [equipes, setEquipes] = useState<Equipe[]>([]);
+  // équipes are currently not used in the UI; remove state to avoid unused-variable errors
   const [realisations, setRealisations] = useState<Realisation[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -100,11 +96,10 @@ export default function Home() {
         };
 
         // Charger les données en parallèle
-        const [clubData, schoolData, equipesData, realisationsData] =
+        const [clubData, schoolData, realisationsData] =
           await Promise.all([
             fetchWithErrorHandling("/data/club.json"),
             fetchWithErrorHandling("/data/ecole.json"),
-            fetchWithErrorHandling("/data/equipes.json"),
             fetchWithErrorHandling("/data/realisations.json"),
           ]);
 
@@ -114,9 +109,8 @@ export default function Home() {
         }
 
         // Mettre à jour les états
-        setClub(clubData);
         setSchool(schoolData);
-        setEquipes(equipesData || []);
+        setClub(clubData);
         setRealisations(realisationsData || []);
         setLoading(false);
       } catch (err) {

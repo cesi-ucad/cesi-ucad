@@ -96,12 +96,11 @@ export default function Home() {
         };
 
         // Charger les données en parallèle
-        const [clubData, schoolData, realisationsData] =
-          await Promise.all([
-            fetchWithErrorHandling("/data/club.json"),
-            fetchWithErrorHandling("/data/ecole.json"),
-            fetchWithErrorHandling("/data/realisations.json"),
-          ]);
+        const [clubData, schoolData, realisationsData] = await Promise.all([
+          fetchWithErrorHandling("/data/club.json"),
+          fetchWithErrorHandling("/data/ecole.json"),
+          fetchWithErrorHandling("/data/realisations.json"),
+        ]);
 
         // Vérifier que les données essentielles sont présentes
         if (!clubData || !schoolData) {

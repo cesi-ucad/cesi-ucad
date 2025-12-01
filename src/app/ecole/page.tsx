@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Section from '../../components/Section';
-import { useState, useEffect } from 'react';
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Section from "../../components/Section";
+import { useState, useEffect } from "react";
 
 interface Specialisation {
   nom: string;
@@ -36,17 +36,19 @@ export default function Ecole() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await fetch('/data/ecole.json');
-        
+        const response = await fetch("/data/ecole.json");
+
         if (!response.ok) {
-          throw new Error('Erreur lors du chargement des données de l\'école');
+          throw new Error("Erreur lors du chargement des données de l'école");
         }
-        
+
         const schoolData = await response.json();
         setSchool(schoolData);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Une erreur est survenue');
-        console.error('Erreur lors du chargement des données:', err);
+        setError(
+          err instanceof Error ? err.message : "Une erreur est survenue"
+        );
+        console.error("Erreur lors du chargement des données:", err);
       } finally {
         setLoading(false);
       }
@@ -92,19 +94,30 @@ export default function Ecole() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-purple-50 p-4 rounded-lg">
                 <h4 className="font-semibold mb-2">Email</h4>
-                <a href={`mailto:${school.contacts.email}`} className="text-blue-600 hover:underline text-sm">
+                <a
+                  href={`mailto:${school.contacts.email}`}
+                  className="text-blue-600 hover:underline text-sm"
+                >
                   {school.contacts.email}
                 </a>
               </div>
               <div className="bg-red-50 p-4 rounded-lg">
                 <h4 className="font-semibold mb-2">Téléphone</h4>
-                <a href={`tel:${school.contacts.telephone}`} className="text-blue-600 hover:underline text-sm">
+                <a
+                  href={`tel:${school.contacts.telephone}`}
+                  className="text-blue-600 hover:underline text-sm"
+                >
                   {school.contacts.telephone}
                 </a>
               </div>
               <div className="bg-indigo-50 p-4 rounded-lg">
                 <h4 className="font-semibold mb-2">Site Web</h4>
-                <a href={school.contacts.site_web} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm">
+                <a
+                  href={school.contacts.site_web}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline text-sm"
+                >
                   {school.contacts.site_web}
                 </a>
               </div>
@@ -121,8 +134,12 @@ export default function Ecole() {
                 <div key={index} className="bg-gray-50 p-4 rounded-lg">
                   <h4 className="font-semibold mb-2">{specialisation.nom}</h4>
                   <p className="text-sm mb-2">{specialisation.description}</p>
-                  <p className="text-sm text-gray-600">Niveau: {specialisation.niveau}</p>
-                  <p className="text-sm text-gray-600">Durée: {specialisation.duree}</p>
+                  <p className="text-sm text-gray-600">
+                    Niveau: {specialisation.niveau}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    Durée: {specialisation.duree}
+                  </p>
                 </div>
               ))}
             </div>

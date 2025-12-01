@@ -18,7 +18,6 @@ export default function MembershipForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder: replace with API call if needed
     alert("Demande d'adhésion soumise !");
     setFormData({ nom: "", email: "", niveau: "", specialite: "" });
   };

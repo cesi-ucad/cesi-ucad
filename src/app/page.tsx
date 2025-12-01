@@ -6,9 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Section from "../components/Section";
 import Card from "../components/Card";
-// Les données sont maintenant chargées dynamiquement via des appels fetch
 
-// Fonction utilitaire pour le chargement paresseux des images
 const useLazyLoading = () => {
   useEffect(() => {
     if ("loading" in HTMLImageElement.prototype) {
@@ -59,13 +57,10 @@ interface Realisation {
   participants: number;
 }
 
-// `Equipe` interface removed — équipes state is not used in the UI
-
 export default function Home() {
-  useLazyLoading(); // Activer le chargement paresseux
+  useLazyLoading();
   const [school, setSchool] = useState<SchoolData | null>(null);
   const [club, setClub] = useState<ClubData | null>(null);
-  // équipes are currently not used in the UI; remove state to avoid unused-variable errors
   const [realisations, setRealisations] = useState<Realisation[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -73,12 +68,9 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Vérifier si on est côté client
         if (typeof window === "undefined") {
           return;
         }
-
-        // Fonction pour charger une ressource avec gestion d'erreur
         const fetchWithErrorHandling = async (url: string) => {
           try {
             const response = await fetch(url);
@@ -90,24 +82,20 @@ export default function Home() {
             }
             return await response.json();
           } catch (err) {
-            console.error(`Erreur lors du chargement de ${url}:`, err);
+            console.error(`Error loading ${url}:`, err);
             return null;
           }
         };
 
-        // Charger les données en parallèle
         const [clubData, schoolData, realisationsData] = await Promise.all([
           fetchWithErrorHandling("/data/club.json"),
           fetchWithErrorHandling("/data/ecole.json"),
           fetchWithErrorHandling("/data/realisations.json"),
         ]);
 
-        // Vérifier que les données essentielles sont présentes
         if (!clubData || !schoolData) {
           throw new Error("Impossible de charger les données essentielles");
         }
-
-        // Mettre à jour les états
         setSchool(schoolData);
         setClub(clubData);
         setRealisations(realisationsData || []);
@@ -197,12 +185,10 @@ export default function Home() {
       </Head>
       <Header />
 
-      {/* Section Hero avec image des étudiants */}
       <section
         className="relative h-screen flex items-center justify-center bg-primary-900 overflow-hidden"
         style={{ overflow: "hidden" }}
       >
-        {/* Image de fond */}
         <div className="absolute inset-0 z-0">
           <img
             src="/images/etudiants-cesi.jpg"
@@ -217,14 +203,13 @@ export default function Home() {
             }}
             loading="eager"
           />
-          {/* Overlay bleu avec opacité réduite */}
+
           <div
             className="absolute inset-0 bg-primary-900"
             style={{ opacity: 0.3 }}
           ></div>
         </div>
 
-        {/* Contenu centré */}
         <div className="relative z-10 px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl lg:text-7xl">
             <span className="block">Bienvenue au</span>
@@ -256,20 +241,8 @@ export default function Home() {
 
           {/* Flèche de défilement */}
           <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <a href="#a-propos" className="text-white">
-              <svg
-                className="w-8 h-8"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                />
-              </svg>
+            <a href="#a-propos" className="text-white" aria-hidden>
+              <span className="w-8 h-8 block" />
             </a>
           </div>
         </div>

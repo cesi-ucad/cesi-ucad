@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Section from '../../components/Section';
-import Card from '../../components/Card';
-import Button from '../../components/Button';
-import ErrorBoundary from '../../components/ErrorBoundary';
-import LoadingSpinner from '../../components/LoadingSpinner';
+import { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Section from "../../components/Section";
+import Card from "../../components/Card";
+import Button from "../../components/Button";
+import ErrorBoundary from "../../components/ErrorBoundary";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 interface Projet {
   titre: string;
@@ -25,21 +25,21 @@ export default function Projets() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const loadProjets = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/data/projets.json');
+      const response = await fetch("/data/projets.json");
       if (!response.ok) {
-        throw new Error('Erreur lors du chargement des projets');
+        throw new Error("Erreur lors du chargement des projets");
       }
       const data = await response.json();
       setProjets(data);
     } catch (err) {
-      console.error('Erreur:', err);
-      setError(err instanceof Error ? err.message : 'Une erreur est survenue');
+      console.error("Erreur:", err);
+      setError(err instanceof Error ? err.message : "Une erreur est survenue");
     } finally {
       setLoading(false);
     }
@@ -49,21 +49,25 @@ export default function Projets() {
     loadProjets();
   }, [loadProjets]);
 
-  // Filtrage des projets
-  const filteredProjets = projets.filter(projet => 
-    projet.titre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    projet.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    projet.technos.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredProjets = projets.filter(
+    (projet) =>
+      projet.titre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      projet.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      projet.technos.some((tech) =>
+        tech.toLowerCase().includes(searchTerm.toLowerCase())
+      )
   );
 
-  // Pagination
   const totalPages = Math.ceil(filteredProjets.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const paginatedProjets = filteredProjets.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const paginatedProjets = filteredProjets.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (loading) {
@@ -78,7 +82,9 @@ export default function Projets() {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
         <div className="text-center">
-          <h2 className="text-xl font-semibold text-red-600 mb-4">Erreur lors du chargement</h2>
+          <h2 className="text-xl font-semibold text-red-600 mb-4">
+            Erreur lors du chargement
+          </h2>
           <p className="text-gray-700 mb-4">{error}</p>
           <Button onClick={loadProjets} variant="primary">
             Réessayer
@@ -94,7 +100,6 @@ export default function Projets() {
       <main className="flex-grow">
         <ErrorBoundary>
           <Section title="Nos Projets">
-            {/* Barre de recherche */}
             <div className="mb-6">
               <input
                 type="text"
@@ -103,7 +108,7 @@ export default function Projets() {
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
-                  setCurrentPage(1); // Reset à la première page lors d'une nouvelle recherche
+                  setCurrentPage(1);
                 }}
               />
             </div>
@@ -124,7 +129,7 @@ export default function Projets() {
                       transition={{
                         duration: 0.5,
                         delay: index * 0.1,
-                        ease: 'easeOut'
+                        ease: "easeOut",
                       }}
                       className="w-full h-full"
                     >
@@ -137,14 +142,18 @@ export default function Projets() {
                             <strong>Auteur :</strong> {projet.auteur}
                           </p>
                           <p className="text-xs sm:text-sm text-gray-600 mb-4">
-                            <strong>Technologies :</strong> {projet.technos.join(', ')}
+                            <strong>Technologies :</strong>{" "}
+                            {projet.technos.join(", ")}
                           </p>
                           <div className="flex justify-between items-center">
                             <span className="text-xs text-gray-500">
-                              {index + 1 + startIndex} sur {filteredProjets.length} projets
+                              {index + 1 + startIndex} sur{" "}
+                              {filteredProjets.length} projets
                             </span>
                             <Button
-                              onClick={() => window.open(projet.github, '_blank')}
+                              onClick={() =>
+                                window.open(projet.github, "_blank")
+                              }
                               variant="primary"
                               size="small"
                             >
@@ -157,7 +166,6 @@ export default function Projets() {
                   ))}
                 </div>
 
-                {/* Pagination */}
                 {totalPages > 1 && (
                   <div className="mt-8 flex justify-center">
                     <nav className="flex items-center space-x-2">
@@ -168,35 +176,37 @@ export default function Projets() {
                       >
                         Précédent
                       </button>
-                      
-                      {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                        // Afficher les numéros de page avec un maximum de 5 boutons
-                        let pageNum;
-                        if (totalPages <= 5) {
-                          pageNum = i + 1;
-                        } else if (currentPage <= 3) {
-                          pageNum = i + 1;
-                        } else if (currentPage >= totalPages - 2) {
-                          pageNum = totalPages - 4 + i;
-                        } else {
-                          pageNum = currentPage - 2 + i;
+
+                      {Array.from(
+                        { length: Math.min(5, totalPages) },
+                        (_, i) => {
+                          let pageNum;
+                          if (totalPages <= 5) {
+                            pageNum = i + 1;
+                          } else if (currentPage <= 3) {
+                            pageNum = i + 1;
+                          } else if (currentPage >= totalPages - 2) {
+                            pageNum = totalPages - 4 + i;
+                          } else {
+                            pageNum = currentPage - 2 + i;
+                          }
+
+                          return (
+                            <button
+                              key={pageNum}
+                              onClick={() => handlePageChange(pageNum)}
+                              className={`w-10 h-10 rounded-full ${
+                                currentPage === pageNum
+                                  ? "bg-blue-600 text-white"
+                                  : "bg-white text-gray-700 hover:bg-gray-100"
+                              }`}
+                            >
+                              {pageNum}
+                            </button>
+                          );
                         }
-                        
-                        return (
-                          <button
-                            key={pageNum}
-                            onClick={() => handlePageChange(pageNum)}
-                            className={`w-10 h-10 rounded-full ${
-                              currentPage === pageNum
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
-                            }`}
-                          >
-                            {pageNum}
-                          </button>
-                        );
-                      })}
-                      
+                      )}
+
                       <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}

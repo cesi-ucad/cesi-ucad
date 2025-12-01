@@ -36,7 +36,6 @@ export default function Realisations() {
               key={realisation.id}
               className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
             >
-              {/* Image en pleine largeur avec hauteur ajustée */}
               <div className="w-full h-64 overflow-hidden bg-gray-100">
                 <img
                   src={`/images/${realisation.image}`}
@@ -44,15 +43,12 @@ export default function Realisations() {
                   className="w-full h-full object-contain object-center p-2"
                   loading="lazy"
                   onError={(e) => {
-                    // Fallback si l'image ne se charge pas -> utiliser une image existante
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
                     target.src = "/images/etudiants-cesi.jpg";
                   }}
                 />
               </div>
-
-              {/* Contenu de la carte - version plus compacte */}
               <div className="p-4 flex-1 flex flex-col">
                 <div className="flex justify-between items-start gap-2">
                   <h3
@@ -89,7 +85,6 @@ export default function Realisations() {
                   <button
                     className="text-primary-600 hover:text-primary-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
                     onClick={() => {
-                      // Gérer le clic sur le bouton
                       console.log("Voir plus pour :", realisation.titre);
                     }}
                   >

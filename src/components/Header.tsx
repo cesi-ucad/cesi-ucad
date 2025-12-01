@@ -12,8 +12,6 @@ import {
   FaUserFriends,
   FaEnvelope,
 } from "react-icons/fa";
-
-// Définition des types pour les propriétés des éléments SVG
 interface SVGProps extends React.SVGProps<SVGSVGElement> {
   className?: string;
   "aria-hidden"?: "true" | "false" | boolean;
@@ -23,18 +21,14 @@ interface SVGProps extends React.SVGProps<SVGSVGElement> {
 const Header: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Fonction pour basculer le menu
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
-  // Type pour les liens de navigation
   interface NavLink {
     href: string;
     label: string;
     icon: FC<SVGProps>;
   }
-
-  // Données des liens de navigation
   const navLinks: NavLink[] = [
     { href: "/", label: "Accueil", icon: FaHome },
     { href: "/ecole", label: "École & Filières", icon: FaGraduationCap },
@@ -49,22 +43,13 @@ const Header: FC = () => {
     <header className="bg-gradient-to-r from-primary-900 via-primary-800 to-primary-900 shadow-xl sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo du club */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center space-x-3">
-              {/* Logo CESI */}
               <div className="w-12 h-12 flex items-center justify-center">
                 <img
                   src="/images/logo-cesi.jpg"
                   alt="Logo CESI UCAD"
                   className="h-10 w-auto"
-                  onError={(e) => {
-                    // Fallback si l'image ne charge pas
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src =
-                      "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiI+PHBhdGggZD0iTTEyIDJMNCA3bDggNSAxMC02LTEwLTZ6bTAgMThsLTgtNSAxMC02IDggNS0xMCA2eiIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTQgMTFsOCA1IDEwLTYiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==";
-                  }}
                 />
               </div>
               <div className="hidden md:block">
@@ -76,7 +61,6 @@ const Header: FC = () => {
             </Link>
           </div>
 
-          {/* Menu desktop */}
           <div className="hidden lg:block">
             <ul className="ml-10 flex items-center space-x-4">
               {navLinks.map((link) => (
@@ -93,7 +77,6 @@ const Header: FC = () => {
             </ul>
           </div>
 
-          {/* Bouton menu mobile */}
           <div className="lg:hidden flex items-center">
             <button
               type="button"
@@ -136,7 +119,6 @@ const Header: FC = () => {
         </div>
       </nav>
 
-      {/* Menu mobile */}
       <div
         id="mobile-menu"
         className={`lg:hidden bg-primary-800 transition-all duration-300 ease-in-out overflow-hidden ${
@@ -155,7 +137,6 @@ const Header: FC = () => {
               {link.label}
             </Link>
           ))}
-          {/* Bouton Espace Membre */}
           <a
             href="/espace-membre"
             className="flex items-center text-white hover:bg-primary-700 px-3 py-2 rounded-md text-base font-medium"

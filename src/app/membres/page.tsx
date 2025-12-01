@@ -14,7 +14,6 @@ interface Membre {
 }
 
 export default function Membres() {
-  // Server component: read all JSON files from public/data/membres
   const membresDir = path.join(process.cwd(), "public", "data", "membres");
   let membres: Membre[] = [];
 
@@ -26,7 +25,6 @@ export default function Membres() {
         try {
           const raw = fs.readFileSync(path.join(membresDir, file), "utf8");
           const parsed = JSON.parse(raw) as Membre;
-          // ensure photo path starts with /images if not absolute
           if (parsed.photo && !parsed.photo.startsWith("/")) {
             parsed.photo = `/${parsed.photo}`;
           }
@@ -59,7 +57,12 @@ export default function Membres() {
                 <h4 className="font-semibold mb-2 text-sm sm:text-base">
                   GitHub :
                 </h4>
-                <a href={membre.github} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                <a
+                  href={membre.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline"
+                >
                   {membre.github}
                 </a>
               </div>

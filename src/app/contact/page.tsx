@@ -41,7 +41,7 @@ export default function ContactPage() {
           React.createElement("input", {
             type: "hidden",
             name: "_next",
-            value: "https://cesi-ucad.sn/contact?success=true",
+            value: "https://precious-puppy-6204c6.netlify.app/contact?success=true",
           }),
           React.createElement(
             "label",

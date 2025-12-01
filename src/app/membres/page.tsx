@@ -3,12 +3,13 @@ import path from "path";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Section from "../../components/Section";
-import Card from "../../components/Card";
+import MembersListClient from "@/components/MembersListClient";
 
 interface Membre {
   id?: string;
   nom: string;
   "annee d'admission": number;
+  genre: string;
   photo: string;
   github: string;
 }
@@ -45,30 +46,7 @@ export default function Membres() {
     <div>
       <Header />
       <Section title="Nos Membres">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {membres.map((membre) => (
-            <Card
-              key={membre.id ?? membre.nom}
-              title={membre.nom}
-              description={`a rejoint la Section Informatique en ${membre["annee d'admission"]}`}
-              image={membre.photo}
-            >
-              <div>
-                <h4 className="font-semibold mb-2 text-sm sm:text-base">
-                  GitHub :
-                </h4>
-                <a
-                  href={membre.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
-                >
-                  {membre.github}
-                </a>
-              </div>
-            </Card>
-          ))}
-        </div>
+        <MembersListClient initialMembers={membres} />
       </Section>
       <Footer />
     </div>

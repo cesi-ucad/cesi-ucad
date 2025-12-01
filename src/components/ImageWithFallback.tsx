@@ -40,7 +40,7 @@ export default function ImageWithFallback({
         className={`transition-opacity duration-300 ${
           isLoading ? "opacity-0" : "opacity-100"
         } ${className}`}
-        onLoadingComplete={() => setIsLoading(false)}
+        onLoad={() => setIsLoading(false)}
         onError={() => {
           setImgSrc(fallbackSrc);
           setIsLoading(false);

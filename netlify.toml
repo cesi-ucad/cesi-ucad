@@ -14,8 +14,7 @@
 
 # Configuration de l'environnement de build
 [build.environment]
-  NODE_VERSION = "18.17.1"  # Version exacte de Node.js
-  NPM_VERSION = "9.6.7"     # Version exacte de npm
+  NODE_VERSION = "20"  # Utiliser Node 20 pour compatibilité avec certaines dépendances
   NEXT_TELEMETRY_DISABLED = "1"
 
 # Variables d'environnement spécifiques à la production

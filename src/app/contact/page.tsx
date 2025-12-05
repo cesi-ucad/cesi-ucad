@@ -141,7 +141,7 @@ export default function ContactPage() {
                 </div>
                 <div className="mt-1">
                   Téléphone :{" "}
-                  <a href="tel:+2210774150964" className="text-primary-600">
+                  <a href="tel:+221 774150964" className="text-primary-600">
                     +221 77 415 09 64
                   </a>
                 </div>

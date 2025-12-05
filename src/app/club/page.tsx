@@ -3,6 +3,7 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Section from "../../components/Section";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import { useState, useEffect } from "react";
 
 interface ClubData {
@@ -64,7 +65,8 @@ export default function Club() {
       .catch((e) => console.error("Erreur président:", e));
   }, []);
 
-  if (loading) return <div>Chargement des informations du club...</div>;
+  if (loading)
+    return <LoadingSpinner text="Chargement des informations du club..." />;
   if (error) return <div>Erreur: {error}</div>;
   if (!club) return null;
   return (
@@ -78,7 +80,10 @@ export default function Club() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {club.mission &&
                 club.mission.map((item, index) => (
-                  <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                  <div
+                    key={index}
+                    className="bg-gray-50 p-4 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-105"
+                  >
                     <h4 className="font-semibold mb-2">{item.titre}</h4>
                     <p className="text-sm">{item.description}</p>
                   </div>
@@ -90,7 +95,10 @@ export default function Club() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {club.vision &&
                 club.vision.map((item, index) => (
-                  <div key={index} className="bg-blue-50 p-4 rounded-lg">
+                  <div
+                    key={index}
+                    className="bg-blue-50 p-4 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-105"
+                  >
                     <h4 className="font-semibold mb-2">{item.titre}</h4>
                     <p className="text-sm">{item.description}</p>
                   </div>
@@ -111,7 +119,10 @@ export default function Club() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {club.valeurs &&
                 club.valeurs.map((valeur, index) => (
-                  <div key={index} className="bg-green-50 p-4 rounded-lg">
+                  <div
+                    key={index}
+                    className="bg-green-50 p-4 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-105"
+                  >
                     <h4 className="font-semibold mb-2">{valeur.titre}</h4>
                     <p className="text-sm">{valeur.description}</p>
                   </div>

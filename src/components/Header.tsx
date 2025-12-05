@@ -8,6 +8,7 @@ import {
   FaGraduationCap,
   FaUsers,
   FaCog,
+  FaNewspaper,
   FaTrophy,
   FaUserFriends,
   FaEnvelope,
@@ -37,6 +38,7 @@ const Header: FC = () => {
     { href: "/realisations", label: "Nos Réalisations", icon: FaTrophy },
     { href: "/membres", label: "Membres", icon: FaUserFriends },
     { href: "/contact", label: "Contact", icon: FaEnvelope },
+    { href: "/articles", label: "Articles", icon: FaNewspaper },
   ];
 
   return (

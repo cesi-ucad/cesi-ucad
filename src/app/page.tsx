@@ -223,7 +223,7 @@ export default function Home() {
           <div className="mt-10 max-w-md mx-auto sm:flex sm:justify-center md:mt-12 space-y-4 sm:space-y-0 sm:space-x-6">
             <div>
               <a
-                href="/club#rejoindre"
+                href="/contact"
                 className="w-full flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 Nous rejoindre
